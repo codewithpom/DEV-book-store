@@ -15,6 +15,9 @@ function MyApp({ Component, pageProps }) {
                 />
             </Head>
 
+
+            <Navbar />
+            <Component {...pageProps} />
             <script
                 src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             />
@@ -22,8 +25,6 @@ function MyApp({ Component, pageProps }) {
             <script
                 src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
             />
-            <Navbar />
-            <Component {...pageProps} />
         </>
     );
 }
