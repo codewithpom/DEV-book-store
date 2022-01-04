@@ -1,11 +1,32 @@
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/router";
 
 export default function Navbar() {
     const [search, setSearch] = useState("");
+    const router = useRouter();
     function handleChange(event: any) {
         setSearch(event.target.value);
     }
+
+    // add keybinding to search
+    useEffect(() => {
+        const handleKeyDown = (event: any) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                router.push(`/search?search=${search}`);
+            }
+
+        };
+        document.getElementById("search").addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.getElementById("search").removeEventListener("keydown", handleKeyDown);
+        };
+    }, [search]);
+
+
+
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="#">Navbar</a>
@@ -18,8 +39,25 @@ export default function Navbar() {
                     <li className="nav-item active">
                         <div className="nav-link">
                             <Link href="/">
-                                <a className="nav-link">Home <span className="sr-only">(current)</span></a>
+                                <a className={
+                                    router.pathname === "/" ? "nav-link active" : "nav-link"
+                                }>Home <span className="sr-only">(current)</span></a>
+                            </Link>
 
+                        </div>
+                    </li>
+
+                    <li className="nav-item">
+                        <div className="nav-link">
+                            <Link href="/search">
+                                <a className={
+                                    router.pathname === "/search" ? "nav-link active" : "nav-link"
+                                }>
+                                    Search
+                                    <span className="sr-only">
+                                        (current)
+                                    </span>
+                                </a>
                             </Link>
                         </div>
                     </li>
@@ -34,6 +72,7 @@ export default function Navbar() {
                         aria-label="Search"
                         value={search}
                         onChange={handleChange}
+                        id="search"
                     />
                     <Link href={`/search?search=${search}`}>
                         <button
