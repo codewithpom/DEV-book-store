@@ -27,7 +27,7 @@ export default function Detail(props: props) {
         <div className="container">
             <br />
             <h1 className="text-center">
-                DEV Book Shop
+                {props.name}
             </h1>
             <main className="mt-5 pt-4">
                 <div className="container dark-grey-text mt-5">
