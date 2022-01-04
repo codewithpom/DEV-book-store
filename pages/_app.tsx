@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
                 />
             </Head>
 
-            <NextNProgress />
+            <NextNProgress options={{ showSpinner: false }} />
 
             <Navbar />
 
