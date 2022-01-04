@@ -27,8 +27,9 @@ export default function Cards(props: Props) {
                 props.books.map((book, index) => (
                     <Link
                         href={`/products/${book._id}`}
+                        key={index}
                     >
-                        <div className="col-md-4 align-items-stretch d-flex" key={index}>
+                        <div className="col-md-4 align-items-stretch d-flex">
                             <div className="card mb-4 mr-4 shadow-sm mx-auto wrapper" style={{ width: "18rem" }}>
                                 <Image
                                     src={book.image}
