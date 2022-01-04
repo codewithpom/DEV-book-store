@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Script from "next/script"
 import Navbar from "../components/Navbar";
 import "../styles/global.css";
 function MyApp({ Component, pageProps }) {
@@ -16,10 +15,12 @@ function MyApp({ Component, pageProps }) {
                 />
             </Head>
 
-            <Script
+            <script
+                src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            />
+
+            <script
                 src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-                integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-                crossOrigin="anonymous"
             />
             <Navbar />
             <Component {...pageProps} />
