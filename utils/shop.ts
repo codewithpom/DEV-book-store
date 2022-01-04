@@ -1,18 +1,20 @@
 // import monogodb from 'mongodb';
 import { MongoClient } from 'mongodb';
 import { ObjectId } from 'mongodb';
+let cachedDb: any = null;
 
 const connectionString = process.env.DB_CONNECTION_STRING;
 
 // declare client
 const client = new MongoClient(connectionString);
 // connect to database
-client.connect();
+const promise = client.connect()
 
 
 export class Shop {
     db: string = 'shop';
     async getProducts() {
+        await promise;
         // get database
         const db = client.db(this.db);
         // get collection
@@ -25,6 +27,7 @@ export class Shop {
 
 
     async searchProducts(searchTerm) {
+        await promise;
         // get database
         const db = client.db(this.db);
         // get collection
@@ -39,6 +42,7 @@ export class Shop {
     }
 
     async getProduct(id) {
+        await promise;
         // get database
         const db = client.db(this.db);
         // get collection
