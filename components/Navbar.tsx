@@ -1,6 +1,11 @@
 import Link from "next/link"
+import { useState } from "react"
 
 export default function Navbar() {
+    const [search, setSearch] = useState("");
+    function handleChange(event: any) {
+        setSearch(event.target.value);
+    }
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="#">Navbar</a>
@@ -21,10 +26,24 @@ export default function Navbar() {
 
 
                 </ul>
-                <form className="form-inline my-2 my-lg-0">
-                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <div className="form-inline my-2 my-lg-0">
+                    <input
+                        className="form-control mr-sm-2"
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                        value={search}
+                        onChange={handleChange}
+                    />
+                    <Link href={`/search?search=${search}`}>
+                        <button
+                            className="btn btn-outline-success my-2 my-sm-0"
+                            type="button"
+                        >
+                            Search
+                        </button>
+                    </Link>
+                </div>
             </div>
         </nav>
     )
