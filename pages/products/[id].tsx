@@ -1,7 +1,9 @@
 import Image from "next/image"
 import { getProduct } from "../api/product_details";
+import { useCart } from "react-use-cart"
 
 interface props {
+    _id: string;
     name: string
     price: number
     description: string
@@ -22,7 +24,19 @@ export async function getServerSideProps(context) {
 }
 
 export default function Detail(props: props) {
-    console.log(props)
+    const { addItem } = useCart()
+
+    function addToCart(event) {
+        event.preventDefault()
+        // @ts-ignore
+        const amount = Number(document.getElementById("quantity").value);
+        addItem({
+            id: props._id,
+            name: props.name,
+            price: props.price,
+            image: props.image,
+        }, amount)
+    }
     return (
         <div className="container">
             <br />
@@ -67,14 +81,35 @@ export default function Detail(props: props) {
 
                                 <p>{props.description}</p>
 
-                                <form className="d-flex justify-content-left">
+                                {
+                                    props.stock > 0 ? (
+                                        <form className="d-flex justify-content-left" onSubmit={addToCart}>
 
-                                    <input type="number" value="1" aria-label="Search" className="form-control" style={{ width: "100px" }} />
-                                    <button className="btn btn-primary btn-md my-0 p" type="submit">Add to cart
-                                        <i className="fas fa-shopping-cart ml-1"></i>
-                                    </button>
+                                            <input
+                                                type="number"
+                                                aria-label="Search"
+                                                className="form-control"
+                                                style={{ width: "100px" }}
+                                                required
+                                                placeholder="Quantity"
+                                                min={1}
+                                                max={props.stock}
+                                                id="quantity"
+                                            />
+                                            <button
+                                                className={"btn btn-primary btn-md my-0 p"}
+                                                type={"submit"}
+                                            >
+                                                Add to cart
+                                                <i className="fas fa-shopping-cart ml-1"></i>
+                                            </button>
 
-                                </form>
+                                        </form>
+                                    ) : (
+                                        <></>
+                                    )
+
+                                }
 
                             </div>
 

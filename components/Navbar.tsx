@@ -62,6 +62,21 @@ export default function Navbar() {
                         </div>
                     </li>
 
+                    <li className="nav-item">
+                        <div className="nav-link">
+                            <Link href="/cart">
+                                <a className={
+                                    router.pathname === "/cart" ? "nav-link active" : "nav-link"
+                                }>
+                                    Cart
+                                    <span className="sr-only">
+                                        (current)
+                                    </span>
+                                </a>
+                            </Link>
+                        </div>
+                    </li>
+
 
                 </ul>
                 <div className="form-inline my-2 my-lg-0">

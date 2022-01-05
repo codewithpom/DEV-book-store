@@ -48,7 +48,7 @@ export class Shop {
         // get collection
         const collection = db.collection('products');
         // get all products with callback
-        const product = await collection.find({ _id: new ObjectId(id) });
+        const product = await collection.find({ _id: id });
         const productArray = await product.toArray();
         return productArray[0];
     }
