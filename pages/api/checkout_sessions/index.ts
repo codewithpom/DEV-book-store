@@ -23,7 +23,51 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             payment_method_types: ["card"],
             line_items: req.body.lineItems ?? [],
             success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${req.headers.origin}/cart`
+            cancel_url: `${req.headers.origin}/cart`,
+            shipping_options: [
+                {
+                    shipping_rate_data: {
+                        type: 'fixed_amount',
+                        fixed_amount: {
+                            amount: 0,
+                            currency: 'inr',
+                        },
+                        display_name: 'Free shipping',
+                        // Delivers between 5-7 business days
+                        delivery_estimate: {
+                            minimum: {
+                                unit: 'business_day',
+                                value: 5,
+                            },
+                            maximum: {
+                                unit: 'business_day',
+                                value: 7,
+                            },
+                        }
+                    }
+                },
+                {
+                    shipping_rate_data: {
+                        type: 'fixed_amount',
+                        fixed_amount: {
+                            amount: 105000,
+                            currency: 'usd',
+                        },
+                        display_name: 'Next day air',
+                        // Delivers in exactly 1 business day
+                        delivery_estimate: {
+                            minimum: {
+                                unit: 'business_day',
+                                value: 1,
+                            },
+                            maximum: {
+                                unit: 'business_day',
+                                value: 1,
+                            },
+                        }
+                    }
+                },
+            ],
         });
 
         res.status(200).json(session)
