@@ -51,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         type: 'fixed_amount',
                         fixed_amount: {
                             amount: 105000,
-                            currency: 'usd',
+                            currency: 'inr',
                         },
                         display_name: 'Next day air',
                         // Delivers in exactly 1 business day
