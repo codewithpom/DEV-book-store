@@ -1,7 +1,7 @@
 // You need to install React/React-DOM
 import { Fireworks } from 'fireworks/lib/react'
 
-function App() {
+export default function App() {
     let fxProps = {
         count: 3,
         interval: 200,
