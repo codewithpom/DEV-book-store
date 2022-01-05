@@ -37,7 +37,7 @@ export default function Detail(props: props) {
 
 
                         <div className="col-md-6 mb-4">
-                            {/* <Image
+                            <Image
                                 src={props.image}
                                 className="img-fluid"
                                 alt={props.name}
@@ -46,8 +46,8 @@ export default function Detail(props: props) {
                                 height={500}
                                 placeholder="blur"
                                 blurDataURL={`/_next/image?url=${props.image}&w=16&q=1`}
-                            /> */}
-                            <img src={props.image} className="img-fluid" alt={props.name} />
+                            />
+                            {/* <img src={props.image} className="img-fluid" alt={props.name} /> */}
                         </div>
 
                         <div className="col-md-6 mb-4">
