@@ -1,5 +1,8 @@
 import Stripe from 'stripe';
 import { buffer } from 'micro';
+// import nodemailer to send emails
+
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: null,
@@ -37,6 +40,7 @@ export default async function handler(req, res) {
 
     // 2. Handle event type (add business logic here)
     if (event.type === 'checkout.session.completed') {
+      console.log(event.object)
       console.log(`💰  Payment received!`);
     } else {
       console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`);
