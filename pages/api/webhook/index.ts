@@ -40,7 +40,8 @@ export default async function handler(req, res) {
 
     // 2. Handle event type (add business logic here)
     if (event.type === 'checkout.session.completed') {
-      console.log(`Email: ${event.data.customer_details.email}`)
+      console.log(event.data)
+      console.log(`Email: ${event.data.customer_detail.email}`)
       console.log(`Shipping Address: ${event.data.shipping.address}`)
       console.log(`💰  Payment received!`);
     } else {
