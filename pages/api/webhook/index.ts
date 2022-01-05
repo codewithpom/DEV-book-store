@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       console.log(event.data)
       console.log(`Email: ${event.data.object.customer_details.email}`)
       console.log(`Phone Number: ${event.data.object.customer_details.phone}`)
-      console.log(`Shipping Address: ${event.data.shipping.address}`)
+      console.log(`Shipping Address: ${event.data.object.shipping.address}`)
       console.log(`💰  Payment received!`);
     } else {
       console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`);
