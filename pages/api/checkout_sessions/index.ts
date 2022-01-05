@@ -71,6 +71,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             shipping_address_collection: {
                 allowed_countries: ['IN'],
             },
+            phone_number_collection: {
+                enabled: true
+            }
 
         });
 
