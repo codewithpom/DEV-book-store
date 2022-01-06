@@ -1,13 +1,17 @@
 import Stripe from 'stripe';
 import { buffer } from 'micro';
 const nodemailer = require("nodemailer")
+const MongoClient = require("mongodb").MongoClient;
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
 const senderMail = process.env.SENDING_EMAIL_ADDRESS;
 
-
+// declare client
+const client = new MongoClient(process.env.DB_CONNECTION_STRING);
+// connect to database
+const promise = client.connect()
 
 
 
@@ -127,6 +131,48 @@ The DEV Bot
         else
           console.log(info);
       });
+
+      stripe.checkout.sessions.listLineItems(
+        event.data.object.id,
+        // @ts-ignore
+        async function (err, lineItems) {
+          console.clear()
+          // asynchronously called
+          // @ts-ignore
+          for (item of lineItems.data) {
+            // @ts-ignore
+            console.log(item.price.id)
+            const db = client.db("shop");
+            const collection = db.collection("products");
+            const productDetails = collection.find(
+              {
+                // @ts-ignore
+                _id: item.price.id
+              }
+            )
+
+            productDetails.toArray().then(function (productDetails) {
+              const quantity = productDetails[0].stock;
+              console.log(`Quantity: ${quantity}`)
+              collection.updateOne(
+                {
+                  // @ts-ignore
+                  _id: item.price.id
+                },
+                {
+                  $set: {
+                    // @ts-ignore
+                    "stock": quantity - item.quantity,
+                  },
+
+                }
+              )
+            })
+
+
+          }
+        }
+      );
 
       console.log(`💰  Payment received!`);
     } else {
