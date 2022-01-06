@@ -1,6 +1,9 @@
 import Stripe from 'stripe';
 import { buffer } from 'micro';
 const nodemailer = require("nodemailer")
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
 
 const senderMail = process.env.SENDING_EMAIL_ADDRESS;
 
@@ -116,6 +119,7 @@ The DEV Bot
       res.json({ received: true });
       console.log(htmlMessage)
       await emailTransporter;
+      await sleep(5000);
       emailTransporter.sendMail(mailOptions, function (err, info) {
         if (err)
           console.log(err)
