@@ -116,7 +116,7 @@ The DEV Bot
         subject: 'Order Confirmed', // Subject line
         html: htmlMessage// plain text body
       };
-
+      console.log(htmlMessage)
       emailTransporter.sendMail(mailOptions, function (err, info) {
         if (err)
           console.log(err)
