@@ -58,7 +58,7 @@ export default function Cards(props: Props) {
 
                                         </div>
                                         <strong>
-                                            ${book.price}
+                                            ₹{book.price}
                                         </strong>
                                     </div>
                                 </div>

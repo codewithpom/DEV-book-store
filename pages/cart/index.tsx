@@ -1,6 +1,7 @@
 import React from 'react'
 import { useCart } from 'react-use-cart'
 import loadStripe from "../../utils/get-stripe"
+import Link from 'next/link';
 import axios from 'axios';
 
 
@@ -36,6 +37,7 @@ function Table(props: CartProps) {
                                 <th scope="col" style={{ verticalAlign: "middle" }}>Price</th>
                                 <th scope="col" style={{ verticalAlign: "middle" }}>Quantity</th>
                                 <th scope="col" style={{ verticalAlign: "middle" }}>Total</th>
+                                <th scope="col" style={{ verticalAlign: "middle" }}></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,14 +48,20 @@ function Table(props: CartProps) {
                                         <td className='w-25' style={{ verticalAlign: "middle" }}>
                                             <img src={product.image} alt={product.name} width={50} />
                                         </td>
-                                        <td style={{ verticalAlign: "middle" }}>{product.name}</td>
-                                        <td style={{ verticalAlign: "middle" }}>{product.price}</td>
+                                        <td style={{ verticalAlign: "middle" }}>
+                                            <Link href={`/products/${product.id}`}>
+                                                {product.name}
+                                            </Link>
+                                        </td>
+                                        <td style={{ verticalAlign: "middle" }}>₹{product.price}</td>
                                         <td style={{ verticalAlign: "middle" }}>{product.quantity}</td>
-                                        <td style={{ verticalAlign: "middle" }}>{product.price * product.quantity}</td>
-                                        <button className="btn btn-danger" onClick={() => {
-                                            console.log(product.id)
-                                            props.removeProduct(product.id)
-                                        }}>Remove</button>
+                                        <td style={{ verticalAlign: "middle" }}>₹{product.price * product.quantity}</td>
+                                        <td style={{ verticalAlign: "middle" }}>
+                                            <button className="btn btn-danger" onClick={() => {
+                                                console.log(product.id)
+                                                props.removeProduct(product.id)
+                                            }}>Remove</button>
+                                        </td>
 
                                     </tr>
                                 ))
@@ -98,7 +106,10 @@ export default function index() {
     if (isEmpty) {
         return (
             <div className='container'>
-                <h1>Your cart is empty</h1>
+                <br />
+                <br />
+                <br />
+                <h1 className='text-center'>Your cart is empty</h1>
             </div>
         );
     }

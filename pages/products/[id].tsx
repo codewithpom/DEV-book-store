@@ -37,6 +37,32 @@ export default function Detail(props: props) {
             image: props.image,
         }, amount)
     }
+
+    function Markup() {
+        if (props.stock <= 0) {
+            return (
+                <div className="text-center">
+                    <div className="alert alert-danger" role="alert">
+                        <h4>
+                            Out of Stock
+                        </h4>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className="text-center">
+                    <div className="alert alert-primary" role="alert">
+                        <h4>
+                            In stock
+                        </h4>
+
+
+                    </div>
+                </div>
+            )
+        }
+    }
     return (
         <div className="container">
             <br />
@@ -68,12 +94,10 @@ export default function Detail(props: props) {
 
                             <div className="p-4">
 
-                                <h5>
-                                    {props.stock > 0 ? "In Stock" : "Out of Stock"}
-                                </h5>
+                                <Markup />
 
                                 <p className="lead">
-                                    <span>${props.price}</span>
+                                    <span>₹{props.price}</span>
 
                                 </p>
 
@@ -88,7 +112,7 @@ export default function Detail(props: props) {
                                             <input
                                                 type="number"
                                                 aria-label="Search"
-                                                className="form-control"
+                                                className="form-control mr-4"
                                                 style={{ width: "100px" }}
                                                 required
                                                 placeholder="Quantity"
