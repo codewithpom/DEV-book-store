@@ -1,6 +1,6 @@
 // import monogodb from 'mongodb';
 import { MongoClient } from 'mongodb';
-import { ObjectId } from 'mongodb';
+
 let cachedDb: any = null;
 
 const connectionString = process.env.DB_CONNECTION_STRING;
