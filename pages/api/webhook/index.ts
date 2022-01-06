@@ -116,6 +116,8 @@ The DEV Bot
         subject: 'Order Confirmed', // Subject line
         html: htmlMessage// plain text body
       };
+      // 3. Return a response to acknowledge receipt of the event.
+      res.json({ received: true });
       console.log(htmlMessage)
       emailTransporter.sendMail(mailOptions, function (err, info) {
         if (err)
@@ -129,8 +131,7 @@ The DEV Bot
       console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`);
     }
 
-    // 3. Return a response to acknowledge receipt of the event.
-    res.json({ received: true });
+
   } else {
     res.setHeader('Allow', 'POST');
     res.status(405).end('Method Not Allowed');
