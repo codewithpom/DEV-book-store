@@ -5,7 +5,6 @@ specifiers:
   '@stripe/stripe-js': ^1.22.0
   '@types/react': ^17.0.38
   axios: ^0.24.0
-  fireworks: ^2.2.7
   micro: ^9.3.4
   mongodb: ^4.2.2
   next: ^12.0.4
@@ -21,7 +20,6 @@ dependencies:
   '@popperjs/core': 2.11.0
   '@stripe/stripe-js': 1.22.0
   axios: 0.24.0
-  fireworks: 2.2.7_b08e3c15324cbe90a6ff8fcd416c932c
   micro: 9.3.4
   mongodb: 4.2.2
   next: 12.0.7_react-dom@17.0.2+react@17.0.2
@@ -833,16 +831,6 @@ packages:
     dependencies:
       locate-path: 5.0.0
       path-exists: 4.0.0
-    dev: false
-
-  /fireworks/2.2.7_b08e3c15324cbe90a6ff8fcd416c932c:
-    resolution: {integrity: sha512-14LuFlq60GvgzY/Dto1BKGfhPjOG3gILr+ud0n4Tzr9n7YShm3N44KdwalemOydJ+wKMohtIDvhpIcLtDoF/hg==}
-    peerDependencies:
-      '@types/react': '>=16.8.0'
-      react: '>=16.8.0'
-    dependencies:
-      '@types/react': 17.0.38
-      react: 17.0.2
     dev: false
 
   /follow-redirects/1.14.6:

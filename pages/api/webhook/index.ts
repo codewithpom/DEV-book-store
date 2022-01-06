@@ -1,6 +1,23 @@
 import Stripe from 'stripe';
 import { buffer } from 'micro';
-// import nodemailer to send emails
+const nodemailer = require("nodemailer")
+
+const senderMail = process.env.SENDING_EMAIL_ADDRESS;
+
+const emailTransporter = nodemailer.createTransport({
+  host: 'smtp.mail.yahoo.com',
+  port: 465,
+  service: 'yahoo',
+  secure: false,
+  auth: {
+    user: senderMail,
+    pass: process.env.SENDING_EMAIL_PASSWORD
+  },
+  debug: false,
+  logger: true
+});
+
+
 
 
 
@@ -41,9 +58,71 @@ export default async function handler(req, res) {
     // 2. Handle event type (add business logic here)
     if (event.type === 'checkout.session.completed') {
       console.log(event.data)
-      console.log(`Email: ${event.data.object.customer_details.email}`)
-      console.log(`Phone Number: ${event.data.object.customer_details.phone}`)
-      console.log(event.data.object.shipping.address)
+      const address = event.data.object.shipping.address;
+      const email = event.data.object.customer_details.email;
+      const phoneNumber = event.data.object.customer_details.phone;
+      const name = event.data.object.shipping.name;
+      let htmlMessage;
+      if (address.line2) {
+        htmlMessage =
+          `
+Hey ${name.split(" ")[0]},
+We just recieved your order you will be notified once any of us verifies your request
+<br>
+<br>
+Your Address:
+    City: <b> ${address.city} </b>
+    <br>
+    Country: <b> ${address.country} </b>
+    <br>
+    Address Line 1: <b> ${address.line1} </b> 
+    <br>
+    Address Line 2: <b> ${address.line2} </b>
+
+<br>
+<br>
+With Regards and Thanks
+<br>
+The DEV Bot
+`
+      } else {
+        htmlMessage =
+          `
+Hey ${name.split(" ")[0]},
+We just recieved your order you will be notified once any of us verifies your request
+<br>
+<br>
+Your Address:
+    City: <b> ${address.city} </b>
+    <br>
+    Country: <b> ${address.country} </b>
+    <br>
+    Address Line 1: <b> ${address.line1} </b>
+
+<br>
+<br>
+With Regards and Thanks
+<br>
+The DEV Bot
+`
+      }
+
+
+
+      const mailOptions = {
+        from: senderMail, // sender address
+        to: email, // list of receivers
+        subject: 'Order Confirmed', // Subject line
+        html: htmlMessage// plain text body
+      };
+
+      emailTransporter.sendMail(mailOptions, function (err, info) {
+        if (err)
+          console.log(err)
+        else
+          console.log(info);
+      });
+
       console.log(`💰  Payment received!`);
     } else {
       console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`);

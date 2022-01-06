@@ -11,7 +11,6 @@
     "@popperjs/core": "^2.11.0",
     "@stripe/stripe-js": "^1.22.0",
     "axios": "^0.24.0",
-    "fireworks": "^2.2.7",
     "micro": "^9.3.4",
     "mongodb": "^4.2.2",
     "next": "^12.0.4",

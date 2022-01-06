@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             mode: "payment",
             payment_method_types: ["card"],
             line_items: req.body.lineItems ?? [],
-            success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+            success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.headers.origin}/cart`,
             shipping_options: [
                 {
