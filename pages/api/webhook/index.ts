@@ -118,8 +118,9 @@ The DEV Bot
       // 3. Return a response to acknowledge receipt of the event.
       res.json({ received: true });
       console.log(htmlMessage)
-      await emailTransporter;
+      console.log("Started wating for email")
       await sleep(5000);
+      console.log("Wait completed")
       emailTransporter.sendMail(mailOptions, function (err, info) {
         if (err)
           console.log(err)
