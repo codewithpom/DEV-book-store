@@ -47,15 +47,11 @@ export default async function handler(req, res) {
     // 2. Handle event type (add business logic here)
     if (event.type === 'checkout.session.completed') {
       const emailTransporter = nodemailer.createTransport({
-        host: 'smtp.mail.yahoo.com',
-        port: 465,
         service: 'yahoo',
-        secure: false,
         auth: {
           user: senderMail,
           pass: process.env.SENDING_EMAIL_PASSWORD
         },
-        debug: false,
         logger: true
       });
       console.log(event.data)
@@ -119,6 +115,7 @@ The DEV Bot
       // 3. Return a response to acknowledge receipt of the event.
       res.json({ received: true });
       console.log(htmlMessage)
+      await emailTransporter;
       emailTransporter.sendMail(mailOptions, function (err, info) {
         if (err)
           console.log(err)
