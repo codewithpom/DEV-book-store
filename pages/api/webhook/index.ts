@@ -4,18 +4,7 @@ const nodemailer = require("nodemailer")
 
 const senderMail = process.env.SENDING_EMAIL_ADDRESS;
 
-const emailTransporter = nodemailer.createTransport({
-  host: 'smtp.mail.yahoo.com',
-  port: 465,
-  service: 'yahoo',
-  secure: false,
-  auth: {
-    user: senderMail,
-    pass: process.env.SENDING_EMAIL_PASSWORD
-  },
-  debug: false,
-  logger: true
-});
+
 
 
 
@@ -57,6 +46,18 @@ export default async function handler(req, res) {
 
     // 2. Handle event type (add business logic here)
     if (event.type === 'checkout.session.completed') {
+      const emailTransporter = nodemailer.createTransport({
+        host: 'smtp.mail.yahoo.com',
+        port: 465,
+        service: 'yahoo',
+        secure: false,
+        auth: {
+          user: senderMail,
+          pass: process.env.SENDING_EMAIL_PASSWORD
+        },
+        debug: false,
+        logger: true
+      });
       console.log(event.data)
       const address = event.data.object.shipping.address;
       const email = event.data.object.customer_details.email;
