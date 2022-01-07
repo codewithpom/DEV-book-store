@@ -69,9 +69,24 @@ function Table(props: CartProps) {
                             }
                         </tbody>
                     </table>
-                    <button className="btn btn-primary" onClick={props.redirectToCheckout}>Checkout</button>
+                    <button
+                        className="btn btn-primary"
+                        onClick={props.redirectToCheckout}
+                    >
+                        Checkout
+                    </button>
+                    <div className="float-right">
+                        <h3>
+                            Total: ₹{props.products.reduce((acc, product) => acc + product.price * product.quantity, 0)}
+                        </h3>
+
+                    </div>
+
+
                 </div>
+
             </div>
+
         </div>
     )
 
