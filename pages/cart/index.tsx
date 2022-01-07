@@ -60,14 +60,16 @@ function Table(props: CartProps) {
                                             <button
                                                 style={{ borderRadius: "40%" }}
                                                 onClick={() => props.updateQuantity(product.id, product.quantity + 1)}
+                                                className='pull-right'
                                             >
                                                 +
                                             </button>
-                                            <span className='m-4'>{product.quantity}</span>
+                                            <span className='m-1'>{product.quantity}</span>
 
                                             <button
                                                 style={{ borderRadius: "40%" }}
                                                 onClick={() => props.updateQuantity(product.id, product.quantity - 1)}
+                                                className='pull-left'
                                             >
                                                 -
                                             </button>
