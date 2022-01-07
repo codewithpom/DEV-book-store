@@ -70,7 +70,14 @@ export default function search(props: props) {
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
             <br />
-            <Table books={results} />
+            {
+                results.length > 0 ?
+                    <Table books={results} />
+                    :
+                    <h1 className='text-center'>No results found</h1>
+
+            }
+
 
         </div>
 
