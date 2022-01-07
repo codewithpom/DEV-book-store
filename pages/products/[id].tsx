@@ -47,6 +47,18 @@ export default function Detail(props: props) {
                             Out of Stock
                         </h4>
                     </div>
+                    <h5>
+                        Contact
+                        <a
+                            href={`mailto:${process.env.NEXT_PUBLIC_OWNER_EMAIL_ADDRESS}`}
+                            target={"_blank"}
+                        >
+                            {" "}
+                            me
+                            {" "}
+                        </a>
+                        for special requests
+                    </h5>
                 </div>
             )
         } else {
