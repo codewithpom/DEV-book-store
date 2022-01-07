@@ -19,6 +19,7 @@ interface CartProps {
     products: CartProduct[];
     removeProduct: (id: string) => void;
     redirectToCheckout: () => void;
+    updateQuantity: (id: string, quantity: number) => void;
 }
 
 
@@ -54,7 +55,24 @@ function Table(props: CartProps) {
                                             </Link>
                                         </td>
                                         <td style={{ verticalAlign: "middle" }}>₹{product.price}</td>
-                                        <td style={{ verticalAlign: "middle" }}>{product.quantity}</td>
+                                        <td style={{ verticalAlign: "middle" }}>
+
+                                            <button
+                                                style={{ borderRadius: "40%" }}
+                                                onClick={() => props.updateQuantity(product.id, product.quantity + 1)}
+                                            >
+                                                +
+                                            </button>
+                                            <span className='m-4'>{product.quantity}</span>
+
+                                            <button
+                                                style={{ borderRadius: "40%" }}
+                                                onClick={() => props.updateQuantity(product.id, product.quantity - 1)}
+                                            >
+                                                -
+                                            </button>
+
+                                        </td>
                                         <td style={{ verticalAlign: "middle" }}>₹{product.price * product.quantity}</td>
                                         <td style={{ verticalAlign: "middle" }}>
                                             <button className="btn btn-danger" onClick={() => {
@@ -130,6 +148,11 @@ export default function index() {
     }
 
     return (
-        <Table products={items as unknown as CartProduct[]} removeProduct={removeItem} redirectToCheckout={redirectToCheckout} />
+        <Table
+            products={items as unknown as CartProduct[]}
+            removeProduct={removeItem}
+            redirectToCheckout={redirectToCheckout}
+            updateQuantity={updateItemQuantity}
+        />
     )
 }
