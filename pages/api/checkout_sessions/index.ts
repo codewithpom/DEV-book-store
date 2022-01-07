@@ -46,27 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         }
                     }
                 },
-                {
-                    shipping_rate_data: {
-                        type: 'fixed_amount',
-                        fixed_amount: {
-                            amount: 105000,
-                            currency: 'inr',
-                        },
-                        display_name: 'Next day air',
-                        // Delivers in exactly 1 business day
-                        delivery_estimate: {
-                            minimum: {
-                                unit: 'business_day',
-                                value: 1,
-                            },
-                            maximum: {
-                                unit: 'business_day',
-                                value: 1,
-                            },
-                        }
-                    }
-                },
+
             ],
             shipping_address_collection: {
                 allowed_countries: ['IN'],
