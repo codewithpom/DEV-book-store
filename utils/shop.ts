@@ -53,4 +53,40 @@ export class Shop {
         return productArray[0];
     }
 
+    async editProduct(id, change_object) {
+        await promise;
+        // get database
+        const db = client.db(this.db);
+        // get collection
+        const collection = db.collection('products');
+        console.log(change_object)
+        // update product
+        const product = await collection.updateOne(
+            { _id: id },
+            {
+                $set: change_object
+            }
+        )
+        return product;
+    }
+
+    async addProduct(id, name, price, stock, image_url, author, description) {
+        await promise;
+        // get database
+        const db = client.db(this.db);
+        // get collection
+        const collection = db.collection('products');
+        // add product
+        const product = await collection.insertOne({
+            _id: id,
+            name: name,
+            price: price,
+            stock: stock,
+            image: image_url,
+            author: author,
+            description: description
+        })
+
+        return product;
+    }
 }

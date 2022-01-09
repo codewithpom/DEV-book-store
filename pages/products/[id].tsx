@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { getProduct } from "../api/product_details";
 import { useCart } from "react-use-cart"
+import { useState } from 'react'
 
 interface props {
     _id: string;
@@ -24,6 +25,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function Detail(props: props) {
+    const [addedToCart, setAddedToCart] = useState(false)
     const { addItem } = useCart()
 
     function addToCart(event) {
@@ -36,6 +38,11 @@ export default function Detail(props: props) {
             price: props.price,
             image: props.image,
         }, amount)
+        setAddedToCart(true);
+        // add a timeout of two seconds to show the success message
+        setTimeout(() => {
+            setAddedToCart(false);
+        }, 2000);
     }
 
     function Markup() {
@@ -119,28 +126,42 @@ export default function Detail(props: props) {
 
                                 {
                                     props.stock > 0 ? (
-                                        <form className="d-flex justify-content-left" onSubmit={addToCart}>
+                                        <>
+                                            <form className="d-flex justify-content-left" onSubmit={addToCart}>
 
-                                            <input
-                                                type="number"
-                                                aria-label="Search"
-                                                className="form-control mr-4"
-                                                style={{ width: "100px" }}
-                                                required
-                                                placeholder="Quantity"
-                                                min={1}
-                                                max={props.stock}
-                                                id="quantity"
-                                            />
-                                            <button
-                                                className={"btn btn-primary btn-md my-0 p"}
-                                                type={"submit"}
-                                            >
-                                                Add to cart
-                                                <i className="fas fa-shopping-cart ml-1"></i>
-                                            </button>
+                                                <input
+                                                    type="number"
+                                                    aria-label="Search"
+                                                    className="form-control mr-4"
+                                                    style={{ width: "100px" }}
+                                                    required
+                                                    placeholder="Quantity"
+                                                    min={1}
+                                                    max={props.stock}
+                                                    id="quantity"
+                                                />
+                                                <button
+                                                    className={"btn btn-primary btn-md my-0 p"}
+                                                    type={"submit"}
+                                                >
+                                                    Add to cart
+                                                    <i className="fas fa-shopping-cart ml-1"></i>
+                                                </button>
 
-                                        </form>
+                                            </form>
+                                            <br />
+                                            {
+                                                addedToCart ? (
+                                                    <div className="alert alert-success" role="alert">
+                                                        <h5 className="text-center">
+                                                            Added to cart
+                                                        </h5>
+                                                    </div>
+                                                ) : (
+                                                    <></>
+                                                )
+                                            }
+                                        </>
                                     ) : (
                                         <></>
                                     )

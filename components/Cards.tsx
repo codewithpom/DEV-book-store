@@ -17,6 +17,7 @@ interface Book {
 
 interface Props {
     books: Book[];
+    admin?: boolean;
 }
 
 
@@ -26,7 +27,12 @@ export default function Cards(props: Props) {
             {
                 props.books.map((book, index) => (
                     <Link
-                        href={`/products/${book._id}`}
+                        href={
+                            props.admin ?
+                                `/admin/products/${book._id}`
+                                :
+                                `/products/${book._id}`
+                        }
                         key={index}
                     >
                         <div className="col-md-4 align-items-stretch d-flex">
