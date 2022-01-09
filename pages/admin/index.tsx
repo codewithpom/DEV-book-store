@@ -1,5 +1,5 @@
 import React from 'react'
-import { hashedEmail, hashedPassword } from "./admin.config";
+import { hashedEmail, hashedPassword } from "../../utils/admin.config";
 import bcrypt from 'bcryptjs'
 import { getProducts } from "../api/products"
 import Table from "../../components/Cards"

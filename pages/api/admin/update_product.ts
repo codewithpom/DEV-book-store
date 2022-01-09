@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Shop } from "../../../utils/shop"
-import { hashedEmail, hashedPassword } from "../../admin/admin.config"
+import { hashedEmail, hashedPassword } from "../../../utils/admin.config"
 import bcrypt from "bcryptjs"
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 

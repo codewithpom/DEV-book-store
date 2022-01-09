@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import getRawBody from 'raw-body';
-import { hashedEmail, hashedPassword } from "../admin.config";
+import { hashedEmail, hashedPassword } from "../../../utils/admin.config";
 const qs = require('querystring')
 import cookie from 'cookie';
 
