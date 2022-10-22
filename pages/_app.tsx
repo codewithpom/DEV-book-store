@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
             <Head>
 
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+                <meta name="google-site-verification" content="5CUSrmIx1WaE_b-YiA6tpsxnC7G6V6uk2iyx5vp2G1w" />
                 <link
                     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
                     rel="stylesheet"
